@@ -10,9 +10,6 @@
 
 namespace hlab
 {
-	// 일반적으로는 헤더파일에서 using namespace std를 사용하지 않습니다.
-	// 여기서는 강의 동영상에 녹화되는 코드 길이를 줄이기 위해서 사용하였습니다.
-	// 예: std::vector -> vector
 	using namespace std;
 	using namespace glm;
 
@@ -28,7 +25,7 @@ namespace hlab
 		Raytracer(const int& width, const int& height)
 			: width(width), height(height)
 		{
-			sphere1 = make_shared<Sphere>(vec3(0.0f, -0.1f, 1.5f), 1.0f);
+			sphere1 = make_shared<Sphere>(vec3(0.0f, -0.1f, 2.5f), 1.2f);
 
 			sphere1->amb = vec3(0.2f);
 			sphere1->dif = vec3(0.0f, 0.0f, 1.0f);
@@ -39,7 +36,7 @@ namespace hlab
 
 			objects.push_back(sphere1);
 
-			auto sphere2 = make_shared<Sphere>(vec3(2.5f, -0.1f, 1.5f), 0.5f);
+			auto sphere2 = make_shared<Sphere>(vec3(1.3f, -0.4f, 0.5f), 0.5f);
 
 			sphere2->amb = vec3(0.2f);
 			sphere2->dif = vec3(0.0f, 0.0f, 1.0f);
@@ -50,10 +47,20 @@ namespace hlab
 
 			objects.push_back(sphere2);
 
+			auto sphere3 = make_shared<Sphere>(vec3(-1.0f, -0.6f, 0.4f), 0.3f);
+
+			sphere3->amb = vec3(0.0f, 0.0f, 1.0f);
+			sphere3->dif = vec3(0.0f, 0.0f, 1.0f);
+			sphere3->spec = vec3(1.0f);
+			sphere3->alpha = 200.0f;
+			sphere3->reflection = 0.3f;
+			sphere3->transparency = 0.3;
+
+			objects.push_back(sphere3);
 
 			auto groundTexture = std::make_shared<Texture>("shadertoy_abstract1.jpg");
 
-			auto ground = make_shared<Square>(vec3(-3.0f, -1.5f, 0.0f), vec3(-3.0f, -1.5f, 5.0f), vec3(3.0f, -1.5f, 5.0f), vec3(3.0f, -1.5f, 0.0f),
+			auto ground = make_shared<Square>(vec3(-4.0f, -1.5f, 0.0f), vec3(-4.0f, -1.5f, 5.0f), vec3(4.0f, -1.5f, 5.0f), vec3(4.0f, -1.5f, 0.0f),
 				vec2(0.0f, 0.0f), vec2(1.0f, 0.0f), vec2(1.0f, 1.0f), vec2(0.0f, 1.0f));
 
 			ground->amb = vec3(1.0f);

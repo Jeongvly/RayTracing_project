@@ -9,7 +9,6 @@
 
 LRESULT WINAPI WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
 
-// 콘솔창이 있으면 디버깅에 유리합니다.
 int main()
 {
 	const int width = 1280, height = 720;
@@ -25,7 +24,7 @@ int main()
 		NULL,
 		NULL,
 		NULL,
-		L"HongLabGraphics", // lpszClassName, L-string
+		L"RayTracing", // lpszClassName, L-string
 		NULL };
 
 	RegisterClassEx(&wc);
@@ -36,7 +35,7 @@ int main()
 
 	HWND hwnd = CreateWindow(
 		wc.lpszClassName,
-		L"HongLabGraphics Example",
+		L"RayTracing Example",
 		WS_OVERLAPPEDWINDOW,
 		100,				// 윈도우 좌측 상단의 x 좌표
 		100,				// 윈도우 좌측 상단의 y 좌표
