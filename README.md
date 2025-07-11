@@ -2,9 +2,14 @@
 
 ## 🔧 프로젝트 목적
 
-cube mapping을 통해 만든 공간에서 Ray Tracing 구현
-Phong model (Ambient, Diffuse, Specular) + reflection + transperency
+본 프로젝트의 목적은 **Cube Mapping 환경**을 기반으로 한 **Ray Tracing 엔진**을 직접 구현하는 것입니다. 실제 3D 공간에서의 광선-물체 간 상호작용을 사실적으로 표현하며, 주요 목표는 다음과 같습니다:
 
+- **Phong Reflection Model** 기반의 조명 모델링 구현: Ambient, Diffuse, Specular 성분의 조합을 통해 물체 표면의 질감과 빛 반사를 표현
+- **거울 반사 (Reflection)** 및 **투명 효과 (Transparency)** 구현: 광선의 반사와 굴절을 재귀적으로 추적하여 현실적인 광선 경로 표현
+- **텍스처**: **UV mapping**과 **super sampling**을 통한 정밀한 텍스처 샘플링
+- **Cube Map** 환경 맵핑을 통한 3D 공간 표현
+
+이 프로젝트는 단순 렌더링을 넘어, **실제 광추적 원리**를 직접 구현하고 이해하는데 목적으로 제작하였습니다. 
 ---
 
 ## 📌 개발 환경
@@ -105,10 +110,39 @@ Phong model (Ambient, Diffuse, Specular) + reflection + transperency
 | `vec3 SamplePoint(const vec2& uv)` | 좌표계 반환(texture -> image) |
 | `vec3 SampleLinear(const vec2& uv)` | 해당 image pixel 값 반환 |
 
-    
 ---
 
-## 📌 인터페이스 및 사용법
+### 5. 'Hit.h'
+
+| 멤버 변수 | 설명 |
+|-----------|------|
+| `float d` | ray의 시작부터 충돌 지점까지의 거리 |
+| `vec3 point` | 충돌한 위치 |
+| `vec3 normal` | 충돌 위치에서 표면의 수직 벡터 |
+| `vec3 uv` | texture 좌표 |
+| 'std::shared_ptr<Object> obj' | 물체의 재질 및 정보를 가져오기 위한 포인터 |
+
+---
+
+### 6. 'Light.h'
+
+| 멤버 변수 | 설명 |
+|-----------|------|
+| `vec3 pos` | 단순화된 형태의 점 조명 |
+
+---
+
+### 7. 'Ray.h'
+
+| 멤버 변수 | 설명 |
+|-----------|------|
+| `vec3 start` | ray의 시작 위치 |
+| `vec3 dir` | ray의 방향 |
+
+---
+
+
+## 📌 실행 예시 및 샘플 출력 
 
 <img width="1579" height="884" alt="Image" src="https://github.com/user-attachments/assets/2c6cdde6-d921-47e4-bf81-daaf6a8ea1ca" />
 
@@ -117,3 +151,5 @@ Phong model (Ambient, Diffuse, Specular) + reflection + transperency
 
 ## 🚀 향후 개선 방향
 
+**fresnel 효과 구현**
+- 빛의 입사각에 따라 반사와 굴절의 비율이 달리지는 Fresenell 방정식 (Schlick 근사)을 적용해 반사 현실성 향상
